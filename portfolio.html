@@ -4,42 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Osman Techverse Portfolio</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
         :root {
             /* Dark Mode (Default) */
-            --bg-color: #111111;
-            --card-bg: #1a1a1a;
-            --text-main: #ffffff;
-            --text-secondary: #a1a1aa;
-            --accent: #0ea5e9;
-            --accent-gradient: linear-gradient(135deg, #0ea5e9, #22d3ee, #818cf8, #c084fc);
-            --border-color: #333;
-            --shadow: 0 10px 30px rgba(0,0,0,0.5);
-            --verified-blue: #1d9bf0;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border-color: #334155;
+            --ring-gap-color: #0f172a;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             
-            /* Ring Colors */
-            --ring-c1: #0ea5e9;
-            --ring-c2: #22d3ee;
-            --ring-c3: #818cf8;
-            --ring-c4: #c084fc;
+            /* Social Colors */
+            --fb: #1877f2;
+            --msg: #00b2ff;
+            --wa: #25d366;
+            --tg: #0088cc;
+            --yt: #ff0000;
         }
 
-        /* Light Mode Override */
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f0f2f5;
+                --bg-color: #f1f5f9;
                 --card-bg: #ffffff;
-                --text-main: #1f2937;
-                --text-secondary: #6b7280;
-                --border-color: #e5e7eb;
-                --shadow: 0 10px 30px rgba(0,0,0,0.1);
+                --text-main: #0f172a;
+                --text-muted: #64748b;
+                --accent: #0284c7;
+                --border-color: #e2e8f0;
+                --ring-gap-color: #f1f5f9;
+                --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
             }
         }
 
@@ -58,25 +57,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
             transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
         }
 
         .container {
             width: 100%;
             max-width: 450px;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 24px;
-            padding: 40px 24px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
         }
 
         /* Profile Image Section */
@@ -84,103 +76,105 @@
             position: relative;
             width: 140px;
             height: 140px;
-            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
 
-        .spinner-ring {
+        .spinning-ring {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, 
-                var(--ring-c1), 
-                var(--ring-c2), 
-                var(--ring-c3), 
-                var(--ring-c4), 
-                var(--ring-c1));
+            background: conic-gradient(#0ea5e9, #22d3ee, #818cf8, #c084fc, #0ea5e9);
             animation: spin 2s linear infinite;
+            z-index: 1;
         }
 
-        .spinner-mask {
+        .ring-gap {
             position: absolute;
-            inset: 4px; /* Thickness of ring */
-            background-color: var(--card-bg);
+            width: 136px;
+            height: 136px;
+            background-color: var(--bg-color);
             border-radius: 50%;
-            z-index: 1;
+            z-index: 2;
             transition: background-color 0.3s ease;
         }
 
         .profile-img {
-            position: relative;
-            width: 124px; /* 132px minus padding visual */
-            height: 124px;
+            width: 132px;
+            height: 132px;
             border-radius: 50%;
             object-fit: cover;
-            z-index: 2;
-            border: 4px solid var(--card-bg); /* Inner gap */
-            transition: border-color 0.3s ease;
+            z-index: 3;
+            position: relative;
         }
 
-        /* Name & Verification */
-        .header h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
+        /* Name & Bio */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .name-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         .verified-badge {
-            color: var(--verified-blue);
+            color: #1d9bf0;
             font-size: 1.1rem;
         }
 
-        /* Typing Bio */
         .bio-container {
-            height: 70px; /* Fixed height for 3 lines */
-            margin-bottom: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .typing-text {
-            color: var(--accent);
-            font-weight: 500;
             font-size: 0.95rem;
-            line-height: 1.5;
-            white-space: pre-wrap;
+            font-weight: 500;
+            color: var(--accent);
+            min-height: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .cursor {
             display: inline-block;
             width: 2px;
+            height: 1.2em;
             background-color: var(--accent);
+            margin-left: 2px;
             animation: blink 1s step-end infinite;
         }
 
         /* Info Card */
         .info-card {
-            background-color: rgba(128, 128, 128, 0.05);
+            background-color: var(--card-bg);
+            width: 100%;
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease;
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 0.8rem 0;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .info-row:last-child {
@@ -188,55 +182,55 @@
         }
 
         .info-label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-weight: 400;
         }
 
         .info-value {
+            color: var(--text-main);
             font-weight: 600;
             text-align: right;
         }
 
-        /* Contact Section */
-        .contact-btn-main {
+        /* Contact Button */
+        .contact-btn {
             width: 100%;
-            padding: 14px;
+            padding: 1rem;
             border: none;
             border-radius: 12px;
-            background: var(--accent-gradient);
+            background: linear-gradient(135deg, #0ea5e9, #818cf8);
             color: white;
-            font-weight: 600;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
-            transition: transform 0.2s ease, opacity 0.2s;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            margin-bottom: 1rem;
         }
 
-        .contact-btn-main:active {
+        .contact-btn:active {
             transform: scale(0.98);
         }
 
-        .contact-content {
-            height: 0;
+        /* Contact Section (Hidden) */
+        .contact-section {
+            width: 100%;
+            max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: height 0.4s ease, opacity 0.4s ease;
-        }
-
-        .contact-content.open {
-            height: auto;
-            opacity: 1;
-            padding-top: 15px;
-        }
-
-        .social-grid {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+        }
+
+        .contact-section.active {
+            opacity: 1;
+            margin-bottom: 2rem;
         }
 
         .social-btn {
@@ -248,58 +242,57 @@
             border-radius: 10px;
             text-decoration: none;
             color: white;
+            font-weight: 600;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease;
         }
 
         .social-btn:active {
-            transform: scale(0.96);
+            transform: scale(0.95);
         }
 
-        .social-btn.full-width {
-            grid-column: span 2;
-        }
+        .social-btn i { font-size: 1.2rem; }
 
-        /* Social Colors */
-        .fb-bg { background: #1877F2; }
-        .msg-bg { background: linear-gradient(to right, #00B2FF, #006AFF); }
-        .wa-bg { background: #25D366; }
-        .tg-bg { background: #229ED9; }
-        .yt-bg { background: #FF0000; }
+        .fb { background-color: var(--fb); grid-column: span 2; }
+        .msg { background-color: var(--msg); }
+        .wa { background-color: var(--wa); }
+        .tg { background-color: var(--tg); }
+        .yt { background-color: var(--yt); }
 
         /* Footer */
-        footer {
-            margin-top: 30px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 2rem;
+            width: 100%;
         }
 
-        .footer-icons {
-            margin-top: 10px;
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-socials {
             display: flex;
             justify-content: center;
             gap: 20px;
         }
 
-        .footer-icons a {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            transition: color 0.3s;
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
         }
 
-        .footer-icons a:hover {
+        .footer-socials a:hover {
             color: var(--accent);
         }
 
         /* Animations */
         @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes blink {
@@ -307,153 +300,124 @@
             50% { opacity: 0; }
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="card">
-            
-            <div class="profile-wrapper">
-                <div class="spinner-ring"></div>
-                <div class="spinner-mask"></div>
-                <img src="https://linear-aquamarine-xj4ony9jkm.edgeone.app/freepik__osmangraphice-it-looks-like-youve-uploaded-an-imag__66453.jpeg" alt="Osman Profile" class="profile-img">
-            </div>
-
-            <div class="header">
-                <h1>
-                    OSMAN TECHVERSE
-                    <span class="fa-stack verified-badge" style="font-size: 0.6em;">
-                        <i class="fas fa-certificate fa-stack-2x"></i>
-                        <i class="fas fa-check fa-stack-1x fa-inverse"></i>
-                    </span>
-                </h1>
-            </div>
-
-            <div class="bio-container">
-                <span id="typing-area" class="typing-text"></span><span class="cursor">|</span>
-            </div>
-
-            <div class="info-card">
-                <div class="info-row">
-                    <span class="info-label">Age</span>
-                    <span class="info-value">20+</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Gender</span>
-                    <span class="info-value">male</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Religion</span>
-                    <span class="info-value">Islam</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Country</span>
-                    <span class="info-value">Bangladesh</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Address</span>
-                    <span class="info-value">Khagrachhari Mohalchhari</span>
-                </div>
-            </div>
-
-            <div class="contact-wrapper">
-                <button id="contact-toggle" class="contact-btn-main">
-                    Contact Me <i class="fas fa-chevron-down" id="toggle-icon"></i>
-                </button>
-                
-                <div id="contact-content" class="contact-content">
-                    <div class="social-grid">
-                        <a href="https://www.facebook.com/OsmanGraphic" class="social-btn fb-bg full-width" target="_blank">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </a>
-                        <a href="https://m.me/OsmanGraphic" class="social-btn msg-bg" target="_blank">
-                            <i class="fab fa-facebook-messenger"></i> Messenger
-                        </a>
-                        <a href="https://wa.me/8801575715571" class="social-btn wa-bg" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        <a href="https://t.me/osmantechverse" class="social-btn tg-bg" target="_blank">
-                            <i class="fab fa-telegram-plane"></i> Telegram
-                        </a>
-                        <a href="https://youtube.com/@osmantechvers" class="social-btn yt-bg" target="_blank">
-                            <i class="fab fa-youtube"></i> YouTube
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <footer>
-                <p>&copy; 2026 osman Techverse. All rights reserved.</p>
-                <div class="footer-icons">
-                    <a href="https://www.facebook.com/OsmanGraphic" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/8801575715571" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://t.me/osmantechverse" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="https://youtube.com/@osmantechvers" target="_blank"><i class="fab fa-youtube"></i></a>
-                </div>
-            </footer>
-
+        <div class="profile-wrapper">
+            <div class="spinning-ring"></div>
+            <div class="ring-gap"></div>
+            <img src="https://linear-aquamarine-xj4ony9jkm.edgeone.app/freepik__osmangraphice-it-looks-like-youve-uploaded-an-imag__66453.jpeg" alt="Profile" class="profile-img">
         </div>
+
+        <div class="header">
+            <div class="name-container">
+                <h1 class="name">OSMAN TECHVERSE</h1>
+                <span class="verified-badge">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+            </div>
+            <div class="bio-container">
+                <span id="typing-text"></span><span class="cursor"></span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">Age</span>
+                <span class="info-value">20+</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Gender</span>
+                <span class="info-value">Male</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Religion</span>
+                <span class="info-value">Islam</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Country</span>
+                <span class="info-value">Bangladesh</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Address</span>
+                <span class="info-value">Khagrachhari Mohalchhari</span>
+            </div>
+        </div>
+
+        <button class="contact-btn" id="contactBtn">
+            Contact Me <i class="fa-solid fa-chevron-down" id="contactIcon"></i>
+        </button>
+
+        <div class="contact-section" id="contactSection">
+            <a href="https://www.facebook.com/OsmanGraphic" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://m.me/OsmanGraphic" target="_blank" class="social-btn msg">
+                <i class="fa-brands fa-facebook-messenger"></i> Messenger
+            </a>
+            <a href="https://wa.me/8801575715571" target="_blank" class="social-btn wa">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://t.me/osmantechverse" target="_blank" class="social-btn tg">
+                <i class="fa-brands fa-telegram"></i> Telegram
+            </a>
+            <a href="https://youtube.com/@osmantechvers" target="_blank" class="social-btn yt">
+                <i class="fa-brands fa-youtube"></i> YouTube
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p class="copyright">© 2026 osman Techverse. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/OsmanGraphic" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://wa.me/8801575715571" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://t.me/osmantechverse" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtube.com/@osmantechvers" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // Typing Animation Logic
-        const textToType = ["web Developer", "Graphics Designer", "Content Creator"];
-        const typingElement = document.getElementById('typing-area');
-        let currentTextIndex = 0;
-        let charIndex = 0;
-        
+        // Typing Animation
+        const textToType = "web Developer Graphics Designer Content Creator";
+        const typingElement = document.getElementById('typing-text');
+        let index = 0;
+
         function typeWriter() {
-            if (currentTextIndex < textToType.length) {
-                const currentLine = textToType[currentTextIndex];
-                
-                if (charIndex < currentLine.length) {
-                    // Type character
-                    typingElement.innerHTML += currentLine.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, 100); // Typing speed
-                } else {
-                    // Line finished
-                    if (currentTextIndex < textToType.length - 1) {
-                        typingElement.innerHTML += "<br>"; // Add new line
-                    }
-                    currentTextIndex++;
-                    charIndex = 0;
-                    setTimeout(typeWriter, 400); // Pause before next line
-                }
+            if (index < textToType.length) {
+                typingElement.textContent += textToType.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100); // Typing speed
             }
         }
 
-        // Start typing on load
-        window.onload = () => {
-            setTimeout(typeWriter, 500);
-        };
+        // Start animation on load
+        window.addEventListener('DOMContentLoaded', typeWriter);
 
-        // Contact Toggle Logic
-        const toggleBtn = document.getElementById('contact-toggle');
-        const content = document.getElementById('contact-content');
-        const icon = document.getElementById('toggle-icon');
+        // Contact Section Toggle
+        const contactBtn = document.getElementById('contactBtn');
+        const contactSection = document.getElementById('contactSection');
+        const contactIcon = document.getElementById('contactIcon');
 
-        toggleBtn.addEventListener('click', () => {
-            const isOpen = content.classList.contains('open');
+        contactBtn.addEventListener('click', () => {
+            contactSection.classList.toggle('active');
             
-            if (isOpen) {
-                content.classList.remove('open');
-                icon.style.transform = 'rotate(0deg)';
-                // Set fixed height to current scrollHeight to allow transition to 0
-                content.style.height = content.scrollHeight + 'px';
-                setTimeout(() => {
-                    content.style.height = '0';
-                }, 10);
+            // Handle smooth height animation manually for max-height transition
+            if (contactSection.classList.contains('active')) {
+                contactSection.style.maxHeight = contactSection.scrollHeight + "px";
+                contactIcon.classList.remove('fa-chevron-down');
+                contactIcon.classList.add('fa-chevron-up');
             } else {
-                content.classList.add('open');
-                icon.style.transform = 'rotate(180deg)';
-                // Set height to scrollHeight for transition
-                content.style.height = content.scrollHeight + 'px';
-                // Reset to auto after transition for responsiveness
-                setTimeout(() => {
-                    content.style.height = 'auto';
-                }, 400);
+                contactSection.style.maxHeight = null;
+                contactIcon.classList.remove('fa-chevron-up');
+                contactIcon.classList.add('fa-chevron-down');
             }
         });
     </script>
